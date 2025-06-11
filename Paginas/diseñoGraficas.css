@@ -1,0 +1,68 @@
+:root {
+  --fondo: #f0f4f8;
+  --azul-claro: #cce5ff;
+  --azul: #66b2ff;
+  --azul-intermedio: #3399ff;
+  --azul-oscuro: #1c4e80;
+  --blanco: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--fondo);
+  color: var(--azul-oscuro);
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.grafico-contenedor {
+  background: var(--blanco);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.respuesta {
+  margin-top: 1.5rem;
+  background: var(--blanco);
+  padding: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .grafico-contenedor {
+    padding: 1rem;
+  }
+
+  .respuesta {
+    font-size: 1rem;
+  }
+}
