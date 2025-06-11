@@ -2,12 +2,7 @@ const path = require('path');
 
 // Carga el archivo .env desde la ubicación correcta
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
-console.log('Entorno cargado:', {
-  DB_HOST: process.env.DB_HOST,
-  DB_USER: process.env.DB_USER,
-  DB_PASSWORD: process.env.DB_PASSWORD,
-  DB_NAME: process.env.DB_NAME
-});
+
 const mysql = require('mysql2/promise');
 console.log('DB_HOST:', process.env.DB_HOST); // solo para verificar
 
