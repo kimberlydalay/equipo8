@@ -51,8 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         },
         error: function() {
-            // Opcional: mostrar mensaje de error
-            // alert("Error al cargar los datos de cuidados por tipo.");
+            $('#respuesta').text('No se pudieron cargar los datos de cuidados por empleado.');
         }
     });
 });

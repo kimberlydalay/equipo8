@@ -6,13 +6,11 @@ $(document).ready(function() {
     success: function(response) {
       const labels = response.labels;
       const data = response.values;
-      // Mostrar cuántos árboles hay por tipo
       let mensaje = '';
       labels.forEach((label, i) => {
         mensaje += `Hay <strong>${data[i]}</strong> árboles de tipo <strong>${label}</strong>.<br>`;
       });
       $("#respuestaModa").html(mensaje);
-      // Renderizar gráfica
       const ctx = document.getElementById('graficoArboles').getContext('2d');
       new Chart(ctx, {
         type: 'bar',

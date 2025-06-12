@@ -6,8 +6,6 @@ $(document).ready(function () {
         success: function(response) {
             const labels = response.labels;
             const data = response.values;
-
-            // Verifica si todos los valores son cero
             const todosCero = data.every(valor => valor === 0);
 
             if (todosCero) {

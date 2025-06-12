@@ -1,11 +1,11 @@
 $(document).ready(function() {
-  // Llamada AJAX al endpoint real de la API
+  
   $.ajax({
-    url: 'https://equipo8.onrender.com/api/promedioArbolesUbicacion', // URL real de la gráfica
+    url: 'https://equipo8.onrender.com/api/promedioArbolesUbicacion',
     method: 'GET',
     dataType: 'json',
     success: function(data) {
-      console.log(data); // { promedio: "130.5000" }
+      console.log(data);
       if (!data.promedio) {
         $('#respuesta').text('La respuesta de la API no es válida.');
         return;
