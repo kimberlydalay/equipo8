@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
-        url: 'http://localhost:3000/api/informesEmpleado',
+        url: 'https://equipo8.onrender.com/api/informesEmpleado',
         method: 'GET',
         dataType: 'json',
         success: function(response) {

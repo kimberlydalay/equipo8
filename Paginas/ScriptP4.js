@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost:3000/api/actividadesEmpleado',
+        url: 'https://equipo8.onrender.com/api/actividadesEmpleado',
         method: 'GET',
         dataType: 'json',
         success: function(response) {

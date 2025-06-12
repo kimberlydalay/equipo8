@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $.ajax({
-    url: 'http://localhost:3000/api/arbolesPorProyecto',
+    url: 'https://equipo8.onrender.com/api/arbolesPorProyecto',
     method: 'GET',
     dataType: 'json',
     success: function(response) {

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost:3000/api/promedioArbolesUbicacion',
+        url: 'https://equipo8.onrender.com/api/promedioArbolesUbicacion',
         method: 'GET',
         dataType: 'json',
         success: function(response) {

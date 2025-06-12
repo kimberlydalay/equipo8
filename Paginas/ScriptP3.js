@@ -1,7 +1,7 @@
 $(document).ready(function() {
   // Llamada AJAX al endpoint real de la API
   $.ajax({
-    url: 'http://localhost:3000/api/promedioArbolesUbicacion', // URL real de la gráfica
+    url: 'https://equipo8.onrender.com/api/promedioArbolesUbicacion', // URL real de la gráfica
     method: 'GET',
     dataType: 'json',
     success: function(data) {
