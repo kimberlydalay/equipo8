@@ -1,16 +1,31 @@
 $(document).ready(function() {
   $.ajax({
-    url: 'https://equipo8servicios.onrender.com/api/arbolesPorProyecto',
+    url: 'http://localhost:3000/api/tu-endpoint', // Cambia por tu endpoint real
     method: 'GET',
     dataType: 'json',
     success: function(response) {
-      const labels = response.labels;
-      const data = response.values;
+      // Contar cuántas plantas hay de cada tipo
+      const conteoPorTipo = {};
+      response.forEach(planta => {
+        if (conteoPorTipo[planta.tipoNombre]) {
+          conteoPorTipo[planta.tipoNombre]++;
+        } else {
+          conteoPorTipo[planta.tipoNombre] = 1;
+        }
+      });
+
+      // Preparar datos para la gráfica
+      const labels = Object.keys(conteoPorTipo);
+      const data = Object.values(conteoPorTipo);
+
+      // Mostrar mensaje
       let mensaje = '';
       labels.forEach((label, i) => {
-        mensaje += `Hay <strong>${data[i]}</strong> árboles de tipo <strong>${label}</strong>.<br>`;
+        mensaje += `Hay <strong>${data[i]}</strong> plantas de tipo <strong>${label}</strong>.<br>`;
       });
       $("#respuestaModa").html(mensaje);
+
+      // Renderizar gráfica
       const ctx = document.getElementById('graficoArboles').getContext('2d');
       new Chart(ctx, {
         type: 'bar',
@@ -23,7 +38,13 @@ $(document).ready(function() {
               'rgba(102, 178, 255, 0.6)',
               'rgba(153, 204, 255, 0.6)',
               'rgba(51, 153, 255, 0.6)',
-              'rgba(0, 102, 204, 0.6)'
+              'rgba(0, 102, 204, 0.6)',
+              'rgba(76, 175, 80, 0.6)',
+              'rgba(255, 193, 7, 0.6)',
+              'rgba(244, 67, 54, 0.6)',
+              'rgba(156, 39, 176, 0.6)',
+              'rgba(255, 87, 34, 0.6)',
+              'rgba(33, 150, 243, 0.6)'
             ],
             borderColor: '#1c4e80',
             borderWidth: 1
@@ -34,7 +55,7 @@ $(document).ready(function() {
           plugins: {
             title: {
               display: true,
-              text: 'Cantidad de Árboles por Tipo',
+              text: 'Cantidad de Plantas por Tipo',
               font: {
                 size: 18
               }
