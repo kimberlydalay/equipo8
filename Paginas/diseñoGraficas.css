@@ -14,55 +14,75 @@
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--fondo);
-  color: var(--azul-oscuro);
-  padding: 2rem 1rem;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lexend', 'Segoe UI', sans-serif;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+    url('https://www.deraizchile.cl/cdn/shop/articles/Plantas_de_exterior.jpg?crop=center&height=800&v=1679438518&width=1600')
+    no-repeat center center / cover;
+  color: #1b5e20;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px 20px;
 }
 
 h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 24px;
+  letter-spacing: 2px;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
   text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
 }
 
 .grafico-contenedor {
-  background: var(--blanco);
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+  padding: 32px 36px;
+  box-shadow: 0 8px 24px rgba(50, 150, 50, 0.15);
+  border: 2px solid #a5d6a7;
+  max-width: 700px;
   width: 100%;
-  max-width: 600px;
+  margin-bottom: 40px;
 }
 
 canvas {
   width: 100% !important;
   height: auto !important;
+  display: block;
+  margin: 0 auto;
 }
 
 .respuesta {
   margin-top: 1.5rem;
-  background: var(--blanco);
-  padding: 1rem;
-  border-radius: 0.8rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1.2rem 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(76, 175, 80, 0.15);
+  font-size: 1.15rem;
+  color: #2e7d32;
   text-align: center;
+  border: 2px solid #a5d6a7;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 600px) {
   h1 {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
   }
 
   .grafico-contenedor {
-    padding: 1rem;
+    padding: 16px 10px;
   }
 
   .respuesta {
     font-size: 1rem;
+    padding: 0.8rem 0.5rem;
   }
 }
