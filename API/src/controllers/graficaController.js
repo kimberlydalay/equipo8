@@ -1,141 +1,122 @@
 const pool = require('../config/db.js');
 
-// 1. ¿Cuántas plantas hay de cada tipo?
+// 1. Plantas con su tipo de planta
 exports.arbolesPorProyecto = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL plantasPorTipo()');
-    const labels = rows[0].map(row => row.tipo);
-    const values = rows[0].map(row => row.cantidad);
-    res.json({ labels, values });
+    const [rows] = await pool.query('CALL obtenerPlantasConTipo()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener plantas con tipo' });
   }
 };
 
-// 2. ¿Cuántas plantas hay en total?
+// 2. Todas las plantas (para contar desde frontend)
 exports.contarArboles = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL plantasPorTipo()');
-    const total = rows[0].reduce((acc, row) => acc + (row.cantidad || 0), 0);
-    res.json({ total });
+    const [rows] = await pool.query('CALL obtenerPlantasConTipo()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener listado de plantas' });
   }
 };
 
-// 3. ¿Cuántos cuidados se aplican según el tipo de planta?
+// 3. Cuidados con tipo de planta
 exports.informesEmpleado = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL cuidadosPorTipo()');
-    const labels = rows[0].map(row => row.tipo);
-    const values = rows[0].map(row => row.cantidad);
-    res.json({ labels, values });
+    const [rows] = await pool.query('CALL obtenerCuidadosConTipo()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener cuidados con tipo' });
   }
 };
 
-// 4. ¿Cuántas plantas hay en cada ubicación?
+// 4. Plantas con su ubicación
 exports.actividadesEmpleado = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL plantasPorUbicacion()');
-    const labels = rows[0].map(row => row.ubicacion);
-    const values = rows[0].map(row => row.cantidad);
-    res.json({ labels, values });
+    const [rows] = await pool.query('CALL obtenerPlantasPorUbicacion()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener plantas con ubicación' });
   }
 };
 
-// 5. ¿Cuántos registros de cuidado se han hecho por mes?
+// 5. Registros de cuidado
 exports.detallesProyecto = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL registrosPorMes()');
-    const labels = rows[0].map(row => `Mes ${row.mes}`);
-    const values = rows[0].map(row => row.cantidad);
-    res.json({ labels, values });
+    const [rows] = await pool.query('CALL obtenerRegistrosDeCuidado()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener registros de cuidado' });
   }
 };
 
-// 6. ¿Qué cuidados son los más aplicados?
+// 6. Cuidados registrados con nombres
 exports.informesProyecto = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL cuidadosFrecuentes()');
-    const labels = rows[0].map(row => row.nombre);
-    const values = rows[0].map(row => row.veces_aplicado);
-    res.json({ labels, values });
+    const [rows] = await pool.query('CALL obtenerCuidadosRegistrados()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener lista de cuidados aplicados' });
   }
 };
 
-// 7. ¿Cuántas plantas hay en cada categoría?
+// 7. Plantas con categoría
 exports.equiposProyecto = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL plantasPorCategoria()');
-    const labels = rows[0].map(row => row.nombre);
-    const values = rows[0].map(row => row.cantidad);
-    res.json({ labels, values });
+    const [rows] = await pool.query('CALL obtenerPlantasConCategorias()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener plantas con categoría' });
   }
 };
 
-// 8. ¿Cuál es el total de participantes registrados?
+// 8. Participantes
 exports.materialesActividad = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL totalParticipantes()');
-    const total = rows[0][0]?.total || 0;
-    res.json({ total });
+    const [rows] = await pool.query('CALL obtenerParticipantes()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener participantes' });
   }
 };
 
-// 9. ¿Cuál es el promedio de árboles por ubicación?
+// 9. Registros por planta
 exports.promedioArbolesUbicacion = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL promedioArbolesUbicacion()');
-    const promedio = rows[0][0]?.promedio || 0;
-    res.json({ promedio });
+    const [rows] = await pool.query('CALL obtenerRegistrosPorPlanta()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener registros por planta' });
   }
 };
 
-// 10. ¿Qué plantas tienen la mayor cantidad de cuidados registrados?
+// 10. Cuidados por ubicación
 exports.plantasConMuchosCuidados = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL plantasConMuchosCuidados()');
-    const labels = rows[0].map(row => `Planta ${row.idPlanta} (${row.tipoPlanta})`);
-    const values = rows[0].map(row => row.total_cuidados);
-    res.json({ labels, values });
+    const [rows] = await pool.query('CALL obtenerCuidadosPorUbicacion()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener cuidados por ubicación' });
   }
 };
 
-// 11. ¿Cuántos cuidados se aplican por ubicación?
+// 11. Cuidados por ubicación (reutilizado)
 exports.cuidadosPorUbicacion = async (req, res) => {
   try {
-    const [rows] = await pool.query('CALL cuidadosPorUbicacion()');
-    const labels = rows[0].map(row => row.ubicacion);
-    const values = rows[0].map(row => row.total);
-    res.json({ labels, values });
+    const [rows] = await pool.query('CALL obtenerCuidadosPorUbicacion()');
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error en la consulta' });
+    res.status(500).json({ error: 'Error al obtener cuidados por ubicación' });
   }
 };

@@ -1,64 +1,84 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Proyecto Final</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proyecto Paec</title>
+  <!-- Fuente Lexend -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="diseñoHome.css">
 </head>
 <body>
 
-  <h1>Proyecto Final</h1>
+  <div class="encabezado">
+    <!-- Árbol SVG estilizado -->
+    <svg class="icono-arbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <path d="M32 4C25 15 12 16 12 30c0 8 6 14 12 16v10h8V46c6-2 12-8 12-16 0-14-13-15-12-26z" />
+    </svg>
 
-  <div class="pregunta">
-    <p>🟢 ¿Cuántas plantas hay de cada tipo?</p>
-    <button onclick="plantasPorTipo()">Ver Gráfica</button>
+    <h1>Proyecto Paec</h1>
+    <div class="subtitulo">CBTis 66</div>
+
+    <div class="bloque-info" role="region" aria-label="Descripción del proyecto PAEC">
+      El proyecto PAEC, o Programa Aula, Escuela y Comunidad, es una estrategia de educación media superior en México que busca vincular la escuela con su entorno, promoviendo aprendizajes significativos y contextualizados para los estudiantes.
+    </div>
   </div>
 
-  <div class="pregunta">
-    <p>🟢 ¿Cuántos cuidados se aplican según el tipo de planta?</p>
-    <button onclick="cuidadosPorTipo()">Ver Gráfica</button>
+  <div class="contenedor-preguntas" role="main" aria-label="Preguntas del proyecto">
+    <div class="pregunta" tabindex="0" role="button" onclick="plantasPorTipo()">
+      <p>🟢 ¿Cuántas plantas hay de cada tipo?</p>
+      <button onclick="plantasPorTipo(); event.stopPropagation();">Ver Gráfica</button>
+    </div>
+    <div class="pregunta" tabindex="0" role="button" onclick="cuidadosPorTipo()">
+      <p>🟢 ¿Cuántos cuidados se aplican según el tipo de planta?</p>
+      <button onclick="cuidadosPorTipo(); event.stopPropagation();">Ver Gráfica</button>
+    </div>
+    <div class="pregunta" tabindex="0" role="button" onclick="plantasPorUbicacion()">
+      <p>🟢 ¿Cuántas plantas hay en cada ubicación?</p>
+      <button onclick="plantasPorUbicacion(); event.stopPropagation();">Ver Gráfica</button>
+    </div>
+    <div class="pregunta" tabindex="0" role="button" onclick="registrosPorMes()">
+      <p>🟢 ¿Cuántos registros de cuidado se han hecho por mes?</p>
+      <button onclick="registrosPorMes(); event.stopPropagation();">Ver Gráfica</button>
+    </div>
+    <div class="pregunta" tabindex="0" role="button" onclick="cuidadosFrecuentes()">
+      <p>🟢 ¿Qué cuidados son los más aplicados?</p>
+      <button onclick="cuidadosFrecuentes(); event.stopPropagation();">Ver Gráfica</button>
+    </div>
+    <div class="pregunta" tabindex="0" role="button" onclick="plantasPorCategoria()">
+      <p>🟢 ¿Cuántas plantas hay en cada categoría?</p>
+      <button onclick="plantasPorCategoria(); event.stopPropagation();">Ver Gráfica</button>
+    </div>
+    <div class="pregunta" tabindex="0" role="button" onclick="totalParticipantes()">
+      <p>🟢 ¿Cuál es el total de participantes registrados?</p>
+      <button onclick="totalParticipantes(); event.stopPropagation();">Ver Gráfica</button>
+    </div>
+    <div class="pregunta" tabindex="0" role="button" onclick="promedioArbolesUbicacion()">
+      <p>🟢 ¿Cuál es el promedio de árboles por ubicación?</p>
+      <button onclick="promedioArbolesUbicacion(); event.stopPropagation();">Ver Gráfica</button>
+    </div>
+    <div class="pregunta" tabindex="0" role="button" onclick="plantasConMuchosCuidados()">
+      <p>🟢 ¿Qué plantas tienen la mayor cantidad de cuidados registrados?</p>
+      <button onclick="plantasConMuchosCuidados(); event.stopPropagation();">Ver Gráfica</button>
+    </div>
+    <div class="pregunta" tabindex="0" role="button" onclick="cuidadosPorUbicacion()">
+      <p>🟢 ¿Cuántos cuidados se aplican por ubicación?</p>
+      <button onclick="cuidadosPorUbicacion(); event.stopPropagation();">Ver Gráfica</button>
+    </div>
   </div>
 
-  <div class="pregunta">
-    <p>🟢 ¿Cuántas plantas hay en cada ubicación?</p>
-    <button onclick="plantasPorUbicacion()">Ver Gráfica</button>
-  </div>
+  <script>
+    function plantasPorTipo() { window.location.href = "pagina1.html"; }
+    function cuidadosPorTipo() { window.location.href = "pagina2.html"; }
+    function plantasPorUbicacion() { window.location.href = "pagina3.html"; }
+    function registrosPorMes() { window.location.href = "pagina4.html"; }
+    function cuidadosFrecuentes() { window.location.href = "pagina5.html"; }
+    function plantasPorCategoria() { window.location.href = "pagina6.html"; }
+    function totalParticipantes() { window.location.href = "pagina7.html"; }
+    function promedioArbolesUbicacion() { window.location.href = "pagina8.html"; }
+    function plantasConMuchosCuidados() { window.location.href = "pagina9.html"; }
+    function cuidadosPorUbicacion() { window.location.href = "pagina10.html"; }
+  </script>
 
-  <div class="pregunta">
-    <p>🟢 ¿Cuántos registros de cuidado se han hecho por mes?</p>
-    <button onclick="registrosPorMes()">Ver Gráfica</button>
-  </div>
-
-  <div class="pregunta">
-    <p>🟢 ¿Qué cuidados son los más aplicados?</p>
-    <button onclick="cuidadosFrecuentes()">Ver Gráfica</button>
-  </div>
-
-  <div class="pregunta">
-    <p>🟢 ¿Cuántas plantas hay en cada categoría?</p>
-    <button onclick="plantasPorCategoria()">Ver Gráfica</button>
-  </div>
-
-  <div class="pregunta">
-    <p>🟢 ¿Cuál es el total de participantes registrados?</p>
-    <button onclick="totalParticipantes()">Ver Gráfica</button>
-  </div>
-
-  <div class="pregunta">
-    <p>🟢 ¿Cuál es el promedio de árboles por ubicación?</p>
-    <button onclick="promedioArbolesUbicacion()">Ver Gráfica</button>
-  </div>
-
-  <div class="pregunta">
-    <p>🟢 ¿Qué plantas tienen la mayor cantidad de cuidados registrados?</p>
-    <button onclick="plantasConMuchosCuidados()">Ver Gráfica</button>
-  </div>
-
-  <div class="pregunta">
-    <p>🟢 ¿Cuántos cuidados se aplican por ubicación?</p>
-    <button onclick="cuidadosPorUbicacion()">Ver Gráfica</button>
-  </div>
-
-  <script src="scriptH.js"></script>
 </body>
 </html>
