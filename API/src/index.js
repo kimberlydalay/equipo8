@@ -2,13 +2,16 @@ require('dotenv').config(); // Carga variables de entorno al inicio
 const express = require('express');
 const app = express();
 const cors = require('cors');
-app.use(cors({
-  origin: '*', // O especifica el origen: 'http://127.0.0.1:3001'
-}));
+app.use(cors());
 const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes);
 
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 // Middleware para rutas no encontradas
 app.use((req, res, next) => {

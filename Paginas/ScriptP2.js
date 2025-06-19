@@ -18,11 +18,22 @@ document.addEventListener("DOMContentLoaded", function () {
             const labels = Object.keys(conteoPorTipo);
             const data = Object.values(conteoPorTipo);
 
+            // Calcular la moda
+            let moda = '';
+            let max = 0;
+            labels.forEach((label, i) => {
+                if (data[i] > max) {
+                    max = data[i];
+                    moda = label;
+                }
+            });
+
             // Mostrar mensaje
             let mensaje = '';
             labels.forEach((label, i) => {
                 mensaje += `Hay <strong>${data[i]}</strong> cuidados para el tipo de planta <strong>${label}</strong>.<br>`;
             });
+            mensaje += `<br><strong>La moda es: ${moda}</strong> (tipo de planta con más cuidados).`;
             $("#respuestaModa").html(mensaje);
 
             // Renderizar gráfica
