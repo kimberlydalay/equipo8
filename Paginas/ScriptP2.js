@@ -1,25 +1,50 @@
 document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
-        url: 'https://equipo8.onrender.com/api/informesEmpleado',
+        url: 'https://equipo8servicios.onrender.com/api/informesEmpleado', // Cambia por tu endpoint real
         method: 'GET',
         dataType: 'json',
         success: function(response) {
-            const labels = response.labels;
-            const data = response.values;
-            const ctx = document.getElementById('grafica').getContext('2d');
+            // Contar cuántos cuidados hay por tipo de planta
+            const conteoPorTipo = {};
+            response.forEach(cuidado => {
+                if (conteoPorTipo[cuidado.tipoNombre]) {
+                    conteoPorTipo[cuidado.tipoNombre]++;
+                } else {
+                    conteoPorTipo[cuidado.tipoNombre] = 1;
+                }
+            });
+
+            // Preparar datos para la gráfica
+            const labels = Object.keys(conteoPorTipo);
+            const data = Object.values(conteoPorTipo);
+
+            // Mostrar mensaje
+            let mensaje = '';
+            labels.forEach((label, i) => {
+                mensaje += `Hay <strong>${data[i]}</strong> cuidados para el tipo de planta <strong>${label}</strong>.<br>`;
+            });
+            $("#respuestaModa").html(mensaje);
+
+            // Renderizar gráfica
+            const ctx = document.getElementById('graficoArboles').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Número de cuidados',
+                        label: 'Cantidad de Cuidados',
                         data: data,
                         backgroundColor: [
                             'rgba(102, 178, 255, 0.6)',
                             'rgba(153, 204, 255, 0.6)',
                             'rgba(51, 153, 255, 0.6)',
                             'rgba(0, 102, 204, 0.6)',
-                            'rgba(100, 181, 246, 0.6)'
+                            'rgba(76, 175, 80, 0.6)',
+                            'rgba(255, 193, 7, 0.6)',
+                            'rgba(244, 67, 54, 0.6)',
+                            'rgba(156, 39, 176, 0.6)',
+                            'rgba(255, 87, 34, 0.6)',
+                            'rgba(33, 150, 243, 0.6)'
                         ],
                         borderColor: '#1c4e80',
                         borderWidth: 1
@@ -30,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Cuidados según el tipo de planta',
+                            text: 'Cantidad de Cuidados por Tipo de Planta',
                             font: {
                                 size: 18
                             }
@@ -51,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         },
         error: function() {
-            $('#respuesta').text('No se pudieron cargar los datos de cuidados por empleado.');
+            $("#respuestaModa").text("Error al cargar los datos.");
         }
     });
 });

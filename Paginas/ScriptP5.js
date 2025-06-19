@@ -1,11 +1,24 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'https://equipo8.onrender.com/api/detallesProyecto',
+        url: 'https://equipo8servicios.onrender.com/api/detallesProyecto', // Cambia por tu endpoint real
         method: 'GET',
         dataType: 'json',
         success: function(response) {
-            const labels = response.labels;
-            const data = response.values;
+            // Contar cuántas veces se aplicó cada cuidado (por descripción)
+            const conteoCuidados = {};
+            response.forEach(registro => {
+                const desc = registro.descripcion;
+                if (conteoCuidados[desc]) {
+                    conteoCuidados[desc]++;
+                } else {
+                    conteoCuidados[desc] = 1;
+                }
+            });
+
+            // Preparar datos para la gráfica
+            const labels = Object.keys(conteoCuidados);
+            const data = Object.values(conteoCuidados);
+
             const ctx = document.getElementById('graficaCuidados').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
@@ -23,7 +36,7 @@ $(document).ready(function () {
                     responsive: true,
                     plugins: {
                         legend: { display: false },
-                        title: { display: false }
+                        title: { display: true, text: 'Cuidados más aplicados' }
                     },
                     scales: {
                         y: { beginAtZero: true }

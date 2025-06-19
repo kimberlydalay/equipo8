@@ -1,11 +1,24 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'https://equipo8.onrender.com/api/plantasConMuchosCuidados',
+        url: 'https://equipo8servicios.onrender.com/api/plantasConMuchosCuidados', // Cambia por tu endpoint real
         method: 'GET',
         dataType: 'json',
         success: function(response) {
-            const labels = response.labels;
-            const data = response.values;
+            // Contar cuántos cuidados tiene cada planta (por nombre)
+            const conteoPorPlanta = {};
+            response.forEach(item => {
+                const nombre = item.nombre || `Planta ${item.idPlanta}`;
+                if (conteoPorPlanta[nombre]) {
+                    conteoPorPlanta[nombre]++;
+                } else {
+                    conteoPorPlanta[nombre] = 1;
+                }
+            });
+
+            // Preparar datos para la gráfica
+            const labels = Object.keys(conteoPorPlanta);
+            const data = Object.values(conteoPorPlanta);
+
             const ctx = document.getElementById('graficaCuidadosPlantas').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
@@ -25,7 +38,7 @@ $(document).ready(function () {
                     responsive: true,
                     plugins: {
                         legend: { display: true, position: 'bottom' },
-                        title: { display: false }
+                        title: { display: true, text: 'Cuidados registrados por planta' }
                     },
                     scales: {
                         y: { beginAtZero: true }

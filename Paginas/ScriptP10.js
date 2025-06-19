@@ -1,11 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
-        url: 'https://equipo8.onrender.com/api/cuidadosPorUbicacion',
+        url: 'https://equipo8servicios.onrender.com/api/cuidadosPorUbicacion', // Cambia por tu endpoint real
         method: 'GET',
         dataType: 'json',
         success: function(response) {
-            const labels = response.labels;
-            const data = response.values;
+            // Contar cuántos cuidados hay por ubicación
+            const conteoPorUbicacion = {};
+            response.forEach(item => {
+                const ubicacion = item.ubicacion || 'Sin ubicación';
+                if (conteoPorUbicacion[ubicacion]) {
+                    conteoPorUbicacion[ubicacion]++;
+                } else {
+                    conteoPorUbicacion[ubicacion] = 1;
+                }
+            });
+
+            // Preparar datos para la gráfica
+            const labels = Object.keys(conteoPorUbicacion);
+            const data = Object.values(conteoPorUbicacion);
+
             const ctx = document.getElementById('graficaCuidadosUbicacion').getContext('2d');
             new Chart(ctx, {
                 type: 'radar',
@@ -23,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     responsive: true,
                     plugins: {
                         legend: { display: true, position: 'bottom' },
-                        title: { display: false }
+                        title: { display: true, text: 'Cuidados aplicados por ubicación' }
                     },
                     scales: {
                         r: {

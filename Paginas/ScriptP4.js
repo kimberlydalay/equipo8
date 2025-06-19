@@ -1,15 +1,16 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'https://equipo8.onrender.com/api/actividadesEmpleado',
+        url: 'https://equipo8servicios.onrender.com/api/actividadesEmpleado', // Cambia por tu endpoint real
         method: 'GET',
         dataType: 'json',
         success: function(response) {
-            const labels = response.labels;
-            const data = response.values;
+            // Obtener nombres de ubicaciones y cantidad de árboles
+            const labels = response.map(item => item.nombre);
+            const data = response.map(item => Number(item.cantidadArboles));
             const todosCero = data.every(valor => valor === 0);
 
             if (todosCero) {
-                $('#respuesta').text('No hay registros de cuidado para mostrar.');
+                $('#respuesta').text('No hay registros de árboles para mostrar.');
                 return;
             }
 
@@ -19,7 +20,7 @@ $(document).ready(function () {
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Registros de cuidado',
+                        label: 'Cantidad de árboles',
                         data: data,
                         backgroundColor: [
                             '#90CAF9', '#64B5F6', '#42A5F5', '#2196F3', '#1E88E5',
@@ -33,13 +34,13 @@ $(document).ready(function () {
                     responsive: true,
                     plugins: {
                         legend: { display: true, position: 'bottom' },
-                        title: { display: false }
+                        title: { display: true, text: 'Cantidad de árboles por ubicación' }
                     }
                 }
             });
         },
         error: function() {
-            $('#respuesta').text('No se pudieron cargar los datos de registros de cuidado.');
+            $('#respuesta').text('No se pudieron cargar los datos de árboles por ubicación.');
         }
     });
 });

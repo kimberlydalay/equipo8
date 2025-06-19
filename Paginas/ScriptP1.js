@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $.ajax({
-    url: 'http://localhost:3000/api/tu-endpoint', // Cambia por tu endpoint real
+    url: 'https://equipo8servicios.onrender.com/api/arbolesPorProyecto', // Cambia por tu endpoint real
     method: 'GET',
     dataType: 'json',
     success: function(response) {
