@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'https://equipo8servicios.onrender.com/api/actividadesEmpleado', // Cambia por tu endpoint real
+        url: 'https://equipo8servicios.onrender.com/api/actividadesEmpleado',
         method: 'GET',
         dataType: 'json',
         success: function(response) {

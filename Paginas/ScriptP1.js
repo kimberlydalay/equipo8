@@ -1,10 +1,9 @@
 $(document).ready(function() {
   $.ajax({
-    url: 'https://equipo8servicios.onrender.com/api/arbolesPorProyecto', // Cambia por tu endpoint real
+    url: 'https://equipo8servicios.onrender.com/api/arbolesPorProyecto',
     method: 'GET',
     dataType: 'json',
     success: function(response) {
-      // Contar cuántas plantas hay de cada tipo
       const conteoPorTipo = {};
       response.forEach(planta => {
         if (conteoPorTipo[planta.tipoNombre]) {
@@ -14,18 +13,15 @@ $(document).ready(function() {
         }
       });
 
-      // Preparar datos para la gráfica
       const labels = Object.keys(conteoPorTipo);
       const data = Object.values(conteoPorTipo);
 
-      // Mostrar mensaje
       let mensaje = '';
       labels.forEach((label, i) => {
         mensaje += `Hay <strong>${data[i]}</strong> plantas de tipo <strong>${label}</strong>.<br>`;
       });
       $("#respuestaModa").html(mensaje);
 
-      // Renderizar gráfica
       const ctx = document.getElementById('graficoArboles').getContext('2d');
       new Chart(ctx, {
         type: 'bar',

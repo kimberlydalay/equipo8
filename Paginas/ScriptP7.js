@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
-        url: 'https://equipo8servicios.onrender.com/api/equiposProyecto', // Cambia por tu endpoint real
+        url: 'https://equipo8servicios.onrender.com/api/equiposProyecto', 
         method: 'GET',
         dataType: 'json',
         success: function(response) {
